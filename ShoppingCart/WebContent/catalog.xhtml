@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{catalogController.load()}" />
+		</f:metadata>
+	</ui:define>
+	<ui:define name="content">
+		<h1>
+			<h:outputText value="#{message['view.catalog.title']}" />
+		</h1>
+		<h:form>
+			<h:dataTable value="#{catalogModel.products}" var="row">
+				<h:column>
+					<h:outputText value="#{row.name}" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{row.price}" />
+				</h:column>
+				<h:column>
+					<h:commandButton value="Select"
+						action="#{catalogController.select(row)}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
